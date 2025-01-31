@@ -1,11 +1,11 @@
 services:
-  api:
+  user-service:
     container_name: user-service
     build:
-      context: ./
+      context: ./user-service
       dockerfile: Dockerfile
     ports:
-      - '8080:8080'
+      - "8080:8080"
     depends_on:
       - mysql
     restart: on-failure
@@ -22,5 +22,14 @@ services:
       - "3306:3306"
     volumes:
       - ./data/mysql:/var/lib/mysql
+
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    restart: on-failure
 
 

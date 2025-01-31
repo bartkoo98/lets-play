@@ -7,15 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user_settings")
+@RequestMapping("/api/user-settings")
 public class UserSettingsController {
 
     @Autowired
     private UserSettingsRepository userSettingsRepository;
-
-
-    // url do np. ustawien powinien wygladac /api/user_settings/user_id/...
-    // field injection vs construsctor (beans)
 
     @GetMapping("/{id}")
     public ResponseEntity<UserSettings> getUserSettingsById(@PathVariable Long id){
