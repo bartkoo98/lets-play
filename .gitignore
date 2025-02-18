@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### syf z data ###
+data/

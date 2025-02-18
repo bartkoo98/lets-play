@@ -33,3 +33,38 @@ services:
     restart: on-failure
 
 
+  keycloak-mysql:
+    container_name: keycloak-mysql
+    image: mysql:8
+    volumes:
+      - ./data/mysql_keycloak_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:24.0.1
+    command: [ "start-dev", "--import-realm" ]
+    environment:
+      - KC_HOSTNAME=host.docker.internal
+      - KC_HOSTNAME_STRICT=false
+      - KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true
+      - KC_COOKIE_SAMESITE=none
+      - DB_VENDOR=MYSQL
+      - DB_ADDR=keycloak-mysql
+      - DB_PORT=3307
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=password
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "9000:8080"
+    volumes:
+      - ./docker/keycloak/realms/:/opt/keycloak/data/import/
+    depends_on:
+      - keycloak-mysql
