@@ -2,5 +2,12 @@ spring:
   application:
     name: api-gateway
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://host.docker.internal:9000/realms/lets-play
+
 server:
   port: 8081
+
