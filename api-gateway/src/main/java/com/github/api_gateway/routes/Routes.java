@@ -1,6 +1,5 @@
 package com.github.api_gateway.routes;
 
-import org.apache.coyote.Request;
 import org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions;
 import org.springframework.cloud.gateway.server.mvc.handler.HandlerFunctions;
 import org.springframework.context.annotation.Bean;
@@ -16,13 +15,5 @@ public class Routes {
                 .route(RequestPredicates.path("/api/user-settings/**"), HandlerFunctions.http("http://user-service:8080"))
                 .build();
     }
-
-//    @Bean
-//    public RouterFunction<ServerResponse> userServiceRouteAdd(){
-//        return GatewayRouterFunctions.route("user-service")
-//                .route(RequestPredicates.path("/api/user-settings/"), HandlerFunctions.http("http://user-service:8080"))
-//                .build();
-//    }Z
-
 
 }
