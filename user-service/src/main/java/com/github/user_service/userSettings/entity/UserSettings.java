@@ -1,4 +1,4 @@
-package com.github.user_service.entity;
+package com.github.user_service.userSettings.entity;
 
 import jakarta.persistence.*;
 
@@ -11,10 +11,6 @@ public class UserSettings {
     private boolean notification;
     @Enumerated(EnumType.STRING)
     private Language language;
-
-//    @OneToOne(mappedBy = "user_id")
-//    @JoinColumn(name = "user_id")
-//    private long user_id;
 
 
     public Long getId() {

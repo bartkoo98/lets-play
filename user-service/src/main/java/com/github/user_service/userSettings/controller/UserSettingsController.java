@@ -1,7 +1,7 @@
-package com.github.user_service.controller;
+package com.github.user_service.userSettings.controller;
 
-import com.github.user_service.entity.UserSettings;
-import com.github.user_service.repository.UserSettingsRepository;
+import com.github.user_service.userSettings.entity.UserSettings;
+import com.github.user_service.userSettings.repository.UserSettingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
