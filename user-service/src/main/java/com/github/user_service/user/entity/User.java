@@ -1,31 +1,35 @@
 package com.github.user_service.user.entity;
 
-import com.github.user_service.userIdentity.entity.UserIdentity;
-import com.github.user_service.userSettings.entity.UserSettings;
+import com.github.user_service.userGameProfile.entity.UserGameProfile;
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 public class User {
 
     @Id
     private Long id;
+    private UUID keycloakUUID;
     private String username;
-    private String email;
-    private LocalDateTime last_login;
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
+    private Integer age;
+    private String avatar;
+    private String description;
+    // matches, pary
+    @Enumerated(EnumType.STRING)
+    private City city;
+    private Boolean theme;
+    private Boolean notification;
+    @Enumerated(EnumType.STRING)
+    private Language appLanguage;
 
-//    @OneToOne(cascade =  CascadeType.ALL)
-//    @JoinColumn(name = "user_settings_id", referencedColumnName = "id")
-//    private UserSettings userSettings;
-//
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_identity_uuid", referencedColumnName = "keycloak_uuid")
-//    private List<UserIdentity> userIdentityList;
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private Set<UserGameProfile> userGameProfile;
 
-
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private Set<UserLanguage> languages;
 
 }
