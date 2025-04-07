@@ -63,6 +63,9 @@ services:
       - KC_HEALTH_ENABLED=true
       - KC_LOG_LEVEL=INFO
       - KC_HOSTNAME_STRICT=false
+      - KC_HOSTNAME=host.docker.internal
+      - KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true
+      - KEYCLOAK_ISSUER_URL=host.docker.internal
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
     ports:
