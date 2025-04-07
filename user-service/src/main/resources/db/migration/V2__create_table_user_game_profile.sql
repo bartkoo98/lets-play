@@ -1,5 +1,5 @@
 CREATE TABLE UserGameProfile (
-    id BIGINT PRIMARY KEY,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
     game VARCHAR(255) NOT NULL,
     elo VARCHAR(255),
     approach VARCHAR(255),

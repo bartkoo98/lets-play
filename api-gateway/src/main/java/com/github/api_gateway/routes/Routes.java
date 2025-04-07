@@ -12,7 +12,7 @@ public class Routes {
     @Bean
     public RouterFunction<ServerResponse> userServiceRoute(){
         return GatewayRouterFunctions.route("user-service")
-                .route(RequestPredicates.path("/api/user-settings/**"), HandlerFunctions.http("http://user-service:8080"))
+                .route(RequestPredicates.path("/api/users/**"), HandlerFunctions.http("http://user-service:8080"))
                 .build();
     }
 
