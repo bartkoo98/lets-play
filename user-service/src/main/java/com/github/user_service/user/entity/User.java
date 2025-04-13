@@ -135,5 +135,4 @@ public class User {
     public void setLanguages(Set<UserLanguage> languages) {
         this.languages = languages;
     }
-
 }
