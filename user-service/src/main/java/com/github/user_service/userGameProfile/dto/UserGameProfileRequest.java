@@ -1,15 +1,13 @@
-package com.github.user_service.userGameProfile.entity;
+package com.github.user_service.userGameProfile.dto;
 
-import com.github.user_service.user.entity.User;
-import jakarta.annotation.Nullable;
-import jakarta.persistence.*;
+import com.github.user_service.userGameProfile.entity.Game;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "UserGameProfile")
-public class UserGameProfile {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserGameProfileRequest {
+    @NotNull
     private Long id;
     @Enumerated(EnumType.STRING)
     private Game game;
@@ -17,25 +15,7 @@ public class UserGameProfile {
     private String approach;
     private String role;
     private String peak;
-    @Column(name = "accountLink")
     private String accountLink;
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true)
-    private User user;
-
-    public UserGameProfile(Long id, Game game, String elo, String approach, String role, String peak, String accountLink, User user) {
-        this.id = id;
-        this.game = game;
-        this.elo = elo;
-        this.approach = approach;
-        this.role = role;
-        this.peak = peak;
-        this.accountLink = accountLink;
-        this.user = user;
-    }
-    public UserGameProfile(){
-
-    }
 
     public Long getId() {
         return id;
@@ -93,12 +73,14 @@ public class UserGameProfile {
         this.accountLink = accountLink;
     }
 
-    @Nullable
-    public User getUser() {
-        return user;
+    public UserGameProfileRequest(Game game, String elo, String approach, String role, String peak, String accountLink) {
+
+        this.game = game;
+        this.elo = elo;
+        this.approach = approach;
+        this.role = role;
+        this.peak = peak;
+        this.accountLink = accountLink;
     }
 
-    public void setUser(@Nullable User user) {
-        this.user = user;
-    }
 }
