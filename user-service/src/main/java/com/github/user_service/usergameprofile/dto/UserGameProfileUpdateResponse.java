@@ -1,31 +1,22 @@
-package com.github.user_service.userGameProfile.dto;
+package com.github.user_service.usergameprofile.dto;
 
-import com.github.user_service.userGameProfile.entity.Game;
+public class UserGameProfileUpdateResponse {
 
-public class UserGameProfileSaveResponse {
-
-    private Long id;
-    private Game game;
     private String elo;
     private String approach;
     private String role;
     private String peak;
     private String accountLink;
 
-    public Long getId() {
-        return id;
+    public UserGameProfileUpdateResponse() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
+    public UserGameProfileUpdateResponse(String elo, String approach, String role, String peak, String accountLink) {
+        this.elo = elo;
+        this.approach = approach;
+        this.role = role;
+        this.peak = peak;
+        this.accountLink = accountLink;
     }
 
     public String getElo() {

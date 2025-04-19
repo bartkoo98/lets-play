@@ -1,10 +1,11 @@
-package com.github.user_service.userGameProfile.controller;
+package com.github.user_service.usergameprofile.controller;
 
-import com.github.user_service.userGameProfile.dto.UserGameProfileGetResponse;
-import com.github.user_service.userGameProfile.dto.UserGameProfileRequest;
-import com.github.user_service.userGameProfile.dto.UserGameProfileSaveResponse;
-import com.github.user_service.userGameProfile.entity.Game;
-import com.github.user_service.userGameProfile.service.UserGameProfileService;
+import com.github.user_service.usergameprofile.dto.UserGameProfileGetResponse;
+import com.github.user_service.usergameprofile.dto.UserGameProfileCreateRequest;
+import com.github.user_service.usergameprofile.dto.UserGameProfileSaveResponse;
+import com.github.user_service.usergameprofile.dto.UserGameProfileUpdateResponse;
+import com.github.user_service.usergameprofile.entity.Game;
+import com.github.user_service.usergameprofile.service.UserGameProfileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class UserGameProfileController {
     }
 
     @PostMapping("{username}/game-profiles")
-    public ResponseEntity<UserGameProfileSaveResponse> saveUserGameProfile(@RequestBody UserGameProfileRequest userGameProfileRequest, @PathVariable String username) {
-        return new ResponseEntity<>(userGameProfileService.saveUserGameProfile(userGameProfileRequest, username), HttpStatus.CREATED);
+    public ResponseEntity<UserGameProfileSaveResponse> saveUserGameProfile(@RequestBody UserGameProfileCreateRequest userGameProfileCreateRequest, @PathVariable String username) {
+        return new ResponseEntity<>(userGameProfileService.saveUserGameProfile(userGameProfileCreateRequest, username), HttpStatus.CREATED);
     }
 
     @GetMapping("/{username}/game-profiles/{game}")
@@ -43,8 +44,8 @@ public class UserGameProfileController {
     }
 
     @PutMapping("/{username}/game-profiles/{game}")
-    public ResponseEntity<UserGameProfileGetResponse> updateUserGameProfile(@PathVariable String username, @PathVariable Game game,
-                                                                            @RequestBody UserGameProfileRequest request){
+    public ResponseEntity<UserGameProfileUpdateResponse> updateUserGameProfile(@PathVariable String username, @PathVariable Game game,
+                                                                               @RequestBody UserGameProfileCreateRequest request){
         return new ResponseEntity<>(userGameProfileService.updateUserGameProfile(username, game, request), HttpStatus.OK);
     }
 

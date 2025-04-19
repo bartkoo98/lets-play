@@ -1,6 +1,6 @@
-package com.github.user_service.userGameProfile.dto;
+package com.github.user_service.usergameprofile.dto;
 
-import com.github.user_service.userGameProfile.entity.Game;
+import com.github.user_service.usergameprofile.entity.Game;
 
 public class UserGameProfileGetResponse {
     private String elo;

@@ -1,4 +1,4 @@
-package com.github.user_service.userGameProfile.entity;
+package com.github.user_service.usergameprofile.entity;
 
 import com.github.user_service.user.entity.User;
 import jakarta.annotation.Nullable;

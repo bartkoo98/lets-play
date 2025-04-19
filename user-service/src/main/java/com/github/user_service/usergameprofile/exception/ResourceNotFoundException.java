@@ -1,4 +1,4 @@
-package com.github.user_service.userGameProfile.exception;
+package com.github.user_service.usergameprofile.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
 
-    private String resourceName;
-    private String fieldName;
-    private String fieldValue;
+    private final String resourceName;
+    private final String fieldName;
+    private final String fieldValue;
 
 
     public ResourceNotFoundException(String resourceName, String fieldName, String fieldValue) {
@@ -16,17 +16,5 @@ public class ResourceNotFoundException extends RuntimeException {
         this.resourceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
-    }
-
-    public String getFieldValue() {
-        return fieldValue;
-    }
-
-    public String getFieldName() {
-        return fieldName;
-    }
-
-    public String getResourceName() {
-        return resourceName;
     }
 }

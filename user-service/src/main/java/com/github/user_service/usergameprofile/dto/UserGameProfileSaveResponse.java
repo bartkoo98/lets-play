@@ -1,29 +1,15 @@
-package com.github.user_service.userGameProfile.dto;
+package com.github.user_service.usergameprofile.dto;
 
-import com.github.user_service.userGameProfile.entity.Game;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.NotNull;
+import com.github.user_service.usergameprofile.entity.Game;
 
+public class UserGameProfileSaveResponse {
 
-public class UserGameProfileRequest {
-    @NotNull
-    private Long id;
-    @Enumerated(EnumType.STRING)
     private Game game;
     private String elo;
     private String approach;
     private String role;
     private String peak;
     private String accountLink;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Game getGame() {
         return game;
@@ -73,8 +59,7 @@ public class UserGameProfileRequest {
         this.accountLink = accountLink;
     }
 
-    public UserGameProfileRequest(Game game, String elo, String approach, String role, String peak, String accountLink) {
-
+    public UserGameProfileSaveResponse(Game game, String elo, String approach, String role, String peak, String accountLink) {
         this.game = game;
         this.elo = elo;
         this.approach = approach;
@@ -83,4 +68,6 @@ public class UserGameProfileRequest {
         this.accountLink = accountLink;
     }
 
+    public UserGameProfileSaveResponse() {
+    }
 }
