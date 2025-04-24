@@ -8,10 +8,13 @@ import com.github.user_service.usergameprofile.dto.UserGameProfileSaveResponse;
 import com.github.user_service.usergameprofile.dto.UserGameProfileUpdateResponse;
 import com.github.user_service.usergameprofile.entity.Game;
 import com.github.user_service.usergameprofile.entity.UserGameProfile;
+import com.github.user_service.usergameprofile.exception.AccessException;
 import com.github.user_service.usergameprofile.exception.ResourceNotFoundException;
 import com.github.user_service.usergameprofile.repository.UserGameProfileRepository;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Set;
 
 import static com.github.user_service.usergameprofile.dto.mapper.UserGameProfileMapper.*;
@@ -27,8 +30,13 @@ public class UserGameProfileService {
         this.userRepository = userRepository;
     }
 
-    public UserGameProfileSaveResponse saveUserGameProfile(UserGameProfileCreateRequest request, String username) {
+    public UserGameProfileSaveResponse saveUserGameProfile(UserGameProfileCreateRequest request, String username, Jwt jwt) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+
+        String tokenUsername = jwt.getClaim("preferred_username");
+        if (!Objects.equals(username, tokenUsername)){
+            throw new AccessException(username, tokenUsername);
+        }
 
         UserGameProfile profile = userGameProfileRequestToEntity(request);
         profile.setUser(user);
@@ -55,8 +63,13 @@ public class UserGameProfileService {
         return mapToDtoGetResponseSet(profile);
     }
 
-    public String deleteUserGameProfileByGame (String username, Game game){
+    public String deleteUserGameProfileByGame (String username, Game game, Jwt jwt){
         User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+
+        String tokenUsername = jwt.getClaim("preferred_username");
+        if (!Objects.equals(username, tokenUsername)){
+            throw new AccessException(username, tokenUsername);
+        }
 
         UserGameProfile profile = userGameProfileRepository.findByUserAndGame(user, game)
                 .orElseThrow(() -> new ResourceNotFoundException("UserGameProfile", "game", game.toString()));
@@ -66,8 +79,13 @@ public class UserGameProfileService {
         return "UserGameProfile of game: " + game.toString() + " has been deleted for user: " + user.getUsername();
     }
 
-    public UserGameProfileUpdateResponse updateUserGameProfile(String username, Game game, UserGameProfileCreateRequest request){
+    public UserGameProfileUpdateResponse updateUserGameProfile(String username, Game game, UserGameProfileCreateRequest request, Jwt jwt){
         User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+
+        String tokenUsername = jwt.getClaim("preferred_username");
+        if (!Objects.equals(username, tokenUsername)){
+            throw new AccessException(username, tokenUsername);
+        }
 
         UserGameProfile profile = userGameProfileRepository.findByUserAndGame(user, game)
                 .orElseThrow(() -> new ResourceNotFoundException("UserGameProfile", "game", game.toString()));
