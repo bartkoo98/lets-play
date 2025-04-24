@@ -8,6 +8,8 @@ import com.github.user_service.usergameprofile.entity.Game;
 import com.github.user_service.usergameprofile.service.UserGameProfileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -24,8 +26,9 @@ public class UserGameProfileController {
     }
 
     @PostMapping("{username}/game-profiles")
-    public ResponseEntity<UserGameProfileSaveResponse> saveUserGameProfile(@RequestBody UserGameProfileCreateRequest userGameProfileCreateRequest, @PathVariable String username) {
-        return new ResponseEntity<>(userGameProfileService.saveUserGameProfile(userGameProfileCreateRequest, username), HttpStatus.CREATED);
+    public ResponseEntity<UserGameProfileSaveResponse> saveUserGameProfile(@RequestBody UserGameProfileCreateRequest userGameProfileCreateRequest, @PathVariable String username,
+                                                                           @AuthenticationPrincipal Jwt jwt) {
+        return new ResponseEntity<>(userGameProfileService.saveUserGameProfile(userGameProfileCreateRequest, username, jwt), HttpStatus.CREATED);
     }
 
     @GetMapping("/{username}/game-profiles/{game}")
@@ -39,14 +42,17 @@ public class UserGameProfileController {
     }
 
     @DeleteMapping("/{username}/game-profiles/{game}")
-    public ResponseEntity<String> deleteUserGameProfileByGame(@PathVariable String username, @PathVariable Game game){
-        return new ResponseEntity<>(userGameProfileService.deleteUserGameProfileByGame(username, game), HttpStatus.OK);
+    public ResponseEntity<String> deleteUserGameProfileByGame(@PathVariable String username, @PathVariable Game game,
+                                                              @AuthenticationPrincipal Jwt jwt){
+
+        return new ResponseEntity<>(userGameProfileService.deleteUserGameProfileByGame(username, game, jwt), HttpStatus.OK);
     }
 
     @PutMapping("/{username}/game-profiles/{game}")
     public ResponseEntity<UserGameProfileUpdateResponse> updateUserGameProfile(@PathVariable String username, @PathVariable Game game,
-                                                                               @RequestBody UserGameProfileCreateRequest request){
-        return new ResponseEntity<>(userGameProfileService.updateUserGameProfile(username, game, request), HttpStatus.OK);
+                                                                               @RequestBody UserGameProfileCreateRequest request,
+                                                                               @AuthenticationPrincipal Jwt jwt){
+        return new ResponseEntity<>(userGameProfileService.updateUserGameProfile(username, game, request, jwt), HttpStatus.OK);
     }
 
 }
