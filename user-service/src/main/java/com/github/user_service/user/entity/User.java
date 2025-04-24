@@ -1,10 +1,9 @@
 package com.github.user_service.user.entity;
 
-import com.github.user_service.userGameProfile.entity.UserGameProfile;
+import com.github.user_service.usergameprofile.entity.UserGameProfile;
 import jakarta.persistence.*;
 
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 public class User {
@@ -27,7 +26,7 @@ public class User {
     @Column(name = "appLanguage")
     private Language appLanguage;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserGameProfile> userGameProfile;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
