@@ -22,4 +22,8 @@ spring:
     enabled: true
     locations: classpath:db/migration
 
+  testcontainers:
+    mysql:
+      image: mysql:8.0
+
 
