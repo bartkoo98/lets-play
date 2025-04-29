@@ -7,8 +7,5 @@ CREATE TABLE User (
     avatar VARCHAR(255),
     description TEXT,
     city VARCHAR(255),
-    theme BOOLEAN DEFAULT FALSE,
-    notification BOOLEAN DEFAULT TRUE,
-    appLanguage VARCHAR(255) DEFAULT "ENG",
     CONSTRAINT uq_keycloak UNIQUE (keycloakUUID)
 );
