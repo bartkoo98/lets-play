@@ -13,45 +13,46 @@ import java.util.stream.Collectors;
 @Component
 public class UserGameProfileMapper {
 
-    public static UserGameProfileSaveResponse mapToDtoSaveResponse(UserGameProfile profile){
-        return new UserGameProfileSaveResponse(profile.getGame(), profile.getElo(), profile.getApproach(),
-                profile.getRole(), profile.getPeak(), profile.getAccountLink());
+    public static UserGameProfileSaveResponse mapToDtoSaveResponse(UserGameProfile profile) {
+        return UserGameProfileSaveResponse.builder()
+                .game(profile.getGame())
+                .elo(profile.getElo())
+                .approach(profile.getApproach())
+                .role(profile.getRole())
+                .peak(profile.getPeak())
+                .accountLink(profile.getAccountLink())
+                .build();
     }
 
     public static UserGameProfileUpdateResponse mapToDtoUserGameProfileUpdateResponse(UserGameProfile profile){
-        UserGameProfileUpdateResponse dto = new UserGameProfileUpdateResponse();
-        dto.setPeak(profile.getPeak());
-        dto.setRole(profile.getRole());
-        dto.setApproach(profile.getApproach());
-        dto.setAccountLink(profile.getAccountLink());
-        dto.setElo(profile.getElo());
-
-        return dto;
+        return UserGameProfileUpdateResponse.builder()
+                .peak(profile.getPeak())
+                .role(profile.getRole())
+                .approach(profile.getApproach())
+                .accountLink(profile.getAccountLink())
+                .elo(profile.getElo())
+                .build();
     }
 
     public static UserGameProfileGetResponse mapToDtoUserGameProfileGetResponse(UserGameProfile profile){
-        UserGameProfileGetResponse dto = new UserGameProfileGetResponse();
-        dto.setPeak(profile.getPeak());
-        dto.setRole(profile.getRole());
-        dto.setApproach(profile.getApproach());
-        dto.setAccountLink(profile.getAccountLink());
-        dto.setElo(profile.getElo());
-
-        return dto;
+        return UserGameProfileGetResponse.builder()
+                .peak(profile.getPeak())
+                .role(profile.getRole())
+                .approach(profile.getApproach())
+                .accountLink(profile.getAccountLink())
+                .elo(profile.getElo())
+                .build();
     }
 
-    public static UserGameProfile userGameProfileRequestToEntity(UserGameProfileCreateRequest userGameProfileCreateRequest){
-        UserGameProfile profile = new UserGameProfile();
-
-            profile.setGame(userGameProfileCreateRequest.getGame());
-            profile.setElo(userGameProfileCreateRequest.getElo());
-            profile.setApproach(userGameProfileCreateRequest.getApproach());
-            profile.setRole(userGameProfileCreateRequest.getRole());
-            profile.setPeak(userGameProfileCreateRequest.getPeak());
-            profile.setAccountLink(userGameProfileCreateRequest.getAccountLink());
-
-            return profile;
-
+    public static UserGameProfile userGameProfileRequestToEntity(UserGameProfileCreateRequest request){
+        return UserGameProfile.builder()
+                .game(request.getGame())
+                .elo(request.getElo())
+                .approach(request.getApproach())
+                .role(request.getRole())
+                .peak(request.getPeak())
+                .accountLink(request.getAccountLink())
+                .build();
         }
 
     public static Set<UserGameProfileGetResponse> mapToDtoGetResponseSet(Set<UserGameProfile> profiles){
