@@ -1,6 +1,6 @@
 package com.github.user_service.usersettings.entity;
 
-import com.github.user_service.user.entity.Language;
+import com.github.user_service.utils.Language;
 import com.github.user_service.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
