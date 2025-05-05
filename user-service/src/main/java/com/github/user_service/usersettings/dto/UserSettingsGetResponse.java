@@ -1,6 +1,6 @@
 package com.github.user_service.usersettings.dto;
 
-import com.github.user_service.user.entity.Language;
+import com.github.user_service.utils.Language;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Builder;

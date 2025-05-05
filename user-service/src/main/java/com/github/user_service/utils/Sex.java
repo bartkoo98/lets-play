@@ -1,4 +1,4 @@
-package com.github.user_service.user.entity;
+package com.github.user_service.utils;
 
 public enum Sex {
     MALE, FEMALE, NONE;

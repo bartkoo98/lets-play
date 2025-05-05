@@ -1,16 +1,16 @@
 package com.github.user_service.usergameprofile.service;
 
+import com.github.user_service.exception.ResourceNotFoundException;
 import com.github.user_service.user.entity.User;
 import com.github.user_service.user.repository.UserRepository;
-import com.github.user_service.usergameprofile.dto.UserGameProfileGetResponse;
 import com.github.user_service.usergameprofile.dto.UserGameProfileCreateRequest;
+import com.github.user_service.usergameprofile.dto.UserGameProfileGetResponse;
 import com.github.user_service.usergameprofile.dto.UserGameProfileSaveResponse;
 import com.github.user_service.usergameprofile.dto.UserGameProfileUpdateResponse;
 import com.github.user_service.usergameprofile.entity.Game;
 import com.github.user_service.usergameprofile.entity.UserGameProfile;
-import com.github.user_service.usergameprofile.exception.AccessException;
-import com.github.user_service.usergameprofile.exception.ResourceNotFoundException;
 import com.github.user_service.usergameprofile.repository.UserGameProfileRepository;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +34,8 @@ public class UserGameProfileService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         String tokenUsername = jwt.getClaim("preferred_username");
-        if (!Objects.equals(username, tokenUsername)){
-            throw new AccessException(username, tokenUsername);
+        if (!Objects.equals(username, tokenUsername)) {
+            throw new AccessDeniedException("You cannot create user game profile as: " + tokenUsername + "for the account of: " + username);
         }
 
         UserGameProfile profile = userGameProfileRequestToEntity(request);
@@ -46,7 +46,7 @@ public class UserGameProfileService {
         return mapToDtoSaveResponse(profile);
     }
 
-    public UserGameProfileGetResponse getUserGameProfileByGame(String username, Game game){
+    public UserGameProfileGetResponse getUserGameProfileByGame(String username, Game game) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         UserGameProfile profile = userGameProfileRepository.findByUserAndGame(user, game)
@@ -55,7 +55,7 @@ public class UserGameProfileService {
         return mapToDtoUserGameProfileGetResponse(profile);
     }
 
-    public Set<UserGameProfileGetResponse> getAllUserGameProfiles(String username){
+    public Set<UserGameProfileGetResponse> getAllUserGameProfiles(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         Set<UserGameProfile> profile = userGameProfileRepository.findAllGameProfilesByUser(user);
@@ -63,12 +63,12 @@ public class UserGameProfileService {
         return mapToDtoGetResponseSet(profile);
     }
 
-    public String deleteUserGameProfileByGame (String username, Game game, Jwt jwt){
+    public String deleteUserGameProfileByGame(String username, Game game, Jwt jwt) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         String tokenUsername = jwt.getClaim("preferred_username");
-        if (!Objects.equals(username, tokenUsername)){
-            throw new AccessException(username, tokenUsername);
+        if (!Objects.equals(username, tokenUsername)) {
+            throw new AccessDeniedException("You cannot delete user game profile as: " + tokenUsername + "for the account of: " + username);
         }
 
         UserGameProfile profile = userGameProfileRepository.findByUserAndGame(user, game)
@@ -79,12 +79,12 @@ public class UserGameProfileService {
         return "UserGameProfile of game: " + game.toString() + " has been deleted for user: " + user.getUsername();
     }
 
-    public UserGameProfileUpdateResponse updateUserGameProfile(String username, Game game, UserGameProfileCreateRequest request, Jwt jwt){
+    public UserGameProfileUpdateResponse updateUserGameProfile(String username, Game game, UserGameProfileCreateRequest request, Jwt jwt) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
         String tokenUsername = jwt.getClaim("preferred_username");
-        if (!Objects.equals(username, tokenUsername)){
-            throw new AccessException(username, tokenUsername);
+        if (!Objects.equals(username, tokenUsername)) {
+            throw new AccessDeniedException("You cannot update user game profile as: " + tokenUsername + "for the account of: " + username);
         }
 
         UserGameProfile profile = userGameProfileRepository.findByUserAndGame(user, game)
