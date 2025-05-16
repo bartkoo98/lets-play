@@ -4,20 +4,21 @@ import com.github.user_service.userprofile.entity.UserProfile;
 import com.github.user_service.usergameprofile.entity.UserGameProfile;
 import com.github.user_service.usersettings.entity.UserSettings;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String keycloakUUID;
     private String username;

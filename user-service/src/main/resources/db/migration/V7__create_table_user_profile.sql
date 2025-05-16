@@ -12,5 +12,5 @@ CREATE TABLE UserProfile (
 CREATE TABLE UserProfileLanguages (
                                         user_profile_id BIGINT NOT NULL,
                                         language VARCHAR(50) NOT NULL,
-                                        CONSTRAINT fk_user_profile_languages_profile FOREIGN KEY (user_profile_id) REFERENCES user_profile(id)
+                                        CONSTRAINT fk_user_profile_languages_profile FOREIGN KEY (user_profile_id) REFERENCES UserProfile(id)
 );

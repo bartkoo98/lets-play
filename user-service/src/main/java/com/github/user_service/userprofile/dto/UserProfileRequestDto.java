@@ -3,11 +3,13 @@ package com.github.user_service.userprofile.dto;
 import com.github.user_service.utils.City;
 import com.github.user_service.utils.Language;
 import com.github.user_service.utils.Sex;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.Set;
 
-@Getter
+@Builder
+@Data
 public class UserProfileRequestDto {
     private Sex sex;
     private Integer age;

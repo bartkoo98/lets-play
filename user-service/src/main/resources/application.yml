@@ -26,4 +26,14 @@ spring:
     mysql:
       image: mysql:8.0
 
+keycloak:
+  auth-server-url: http://host.docker.internal:9000
+  realm: lets-play
+  client-id: lets-play-id
+  client-secret: "JWp07b8YI8rw9Pwv9NiNeuK1V1O4dMiI"
+  admin:
+    username: admin
+    password: admin
+
+
 

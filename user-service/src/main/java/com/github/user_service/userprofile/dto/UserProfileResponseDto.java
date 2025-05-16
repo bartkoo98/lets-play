@@ -4,12 +4,12 @@ import com.github.user_service.utils.City;
 import com.github.user_service.utils.Language;
 import com.github.user_service.utils.Sex;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.Set;
 
-@Getter
 @Builder
+@Data
 public class UserProfileResponseDto {
     private String username;
     private Sex sex;

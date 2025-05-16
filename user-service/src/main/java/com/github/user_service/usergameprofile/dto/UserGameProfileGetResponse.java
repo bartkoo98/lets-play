@@ -1,6 +1,5 @@
 package com.github.user_service.usergameprofile.dto;
 
-import com.github.user_service.usergameprofile.entity.Game;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

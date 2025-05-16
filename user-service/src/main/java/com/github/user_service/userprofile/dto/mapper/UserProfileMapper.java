@@ -5,6 +5,7 @@ import com.github.user_service.userprofile.dto.UserProfileRequestDto;
 import com.github.user_service.userprofile.dto.UserProfileResponseDto;
 import com.github.user_service.userprofile.entity.UserProfile;
 
+
 public class UserProfileMapper {
 
     public static UserProfile mapToCreateUserProfileFromDto(UserProfileRequestDto dto, User user) {

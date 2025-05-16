@@ -13,6 +13,7 @@ public class Routes {
     public RouterFunction<ServerResponse> userServiceRoute(){
         return GatewayRouterFunctions.route("user-service")
                 .route(RequestPredicates.path("/api/users/**"), HandlerFunctions.http("http://user-service:8080"))
+                .route(RequestPredicates.path("/api/landing"), HandlerFunctions.http("http://user-service:8080"))
                 .build();
     }
 
