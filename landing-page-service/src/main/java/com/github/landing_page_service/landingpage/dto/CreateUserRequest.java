@@ -1,16 +1,18 @@
-package com.github.user_service.user.dto;
+package com.github.landing_page_service.landingpage.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Data
-public class UserResponse {
-    private String keycloakUUID;
+public class CreateUserRequest {
+
     private String username;
-    private boolean verified;
+    private String keycloakUUID;
+
 }

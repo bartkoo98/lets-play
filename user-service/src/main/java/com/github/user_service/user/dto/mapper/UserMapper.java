@@ -10,7 +10,7 @@ public class UserMapper {
                 .builder()
                 .keycloakUUID(user.getKeycloakUUID())
                 .username(user.getUsername())
+                .verified(user.isVerified())
                 .build();
     }
-
 }

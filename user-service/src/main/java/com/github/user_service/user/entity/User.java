@@ -8,7 +8,6 @@ import lombok.*;
 
 import java.util.Set;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,6 +21,7 @@ public class User {
     private Long id;
     private String keycloakUUID;
     private String username;
+    private boolean verified;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserProfile userProfile;
