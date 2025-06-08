@@ -12,6 +12,15 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_user_service:3306/db_user_service
 
+  landing-page-service:
+    container_name: landing-page-service
+    build:
+      context: ./landing-page-service
+      dockerfile: Dockerfile
+    ports:
+      - "2222:2222"
+    restart: on-failure
+
   mysql:
     image: mysql:9
     container_name: mysql_user_service

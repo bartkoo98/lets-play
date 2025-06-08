@@ -5,9 +5,12 @@ import com.github.user_service.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
+
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class UserSettings {
 

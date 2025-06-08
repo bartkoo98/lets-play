@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UserGameProfileGetResponse {
+public class UserGameProfileMeResponse {
+    private String game;
     private String elo;
     private String approach;
     private String role;
