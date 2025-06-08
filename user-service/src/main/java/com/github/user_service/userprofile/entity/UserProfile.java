@@ -26,6 +26,7 @@ public class UserProfile {
     @Enumerated(EnumType.STRING)
     @Column(name = "sex")
     private Sex sex;
+    // TODO data urodzenia - dopytac chatgpt czym lepiej zarzadzac
     private Integer age;
     private String avatar;
     private String description;

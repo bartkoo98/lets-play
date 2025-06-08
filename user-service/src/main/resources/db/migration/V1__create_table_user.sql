@@ -2,6 +2,6 @@ CREATE TABLE User (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     keycloakUUID VARCHAR(36) NOT NULL,
     username VARCHAR(255) NOT NULL UNIQUE,
-    verified BOOLEAN NOT NULL,
+    isProfileCompleted BOOLEAN NOT NULL,
     CONSTRAINT uq_keycloak UNIQUE (keycloakUUID)
 );

@@ -13,9 +13,9 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Data
-public class UserResponse {
+public class UserMeResponse {
     //user
-    private String username;
+    private boolean isProfileCompleted;
     //userprofile
     private String sex;
     private Integer age;
@@ -23,6 +23,10 @@ public class UserResponse {
     private String description;
     private String city;
     private Set<Language> userLanguages;
+    //usersettings
+    private Boolean theme;
+    private Boolean notification;
+    private String appLanguage;
     //usergameprofile
     private Set<UserGameProfileMeResponse> userGameProfiles;
 }

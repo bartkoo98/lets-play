@@ -1,7 +1,7 @@
 package com.github.landing_page_service.landingpage.service;
 
-import com.github.landing_page_service.landingpage.dto.LandingPageResponse;
-import com.github.landing_page_service.landingpage.dto.LandingPageUserResponse;
+import com.github.landing_page_service.exception.UserCreationException;
+import com.github.landing_page_service.landingpage.dto.LandingPageUserMeResponse;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
@@ -10,26 +10,27 @@ import java.util.Optional;
 @Service
 public class LandingPageService {
 
-    private final UserClient userClient;
-    private final UserCreator userCreator;
+    private final UserServiceClient userServiceClient;
 
-    public LandingPageService(UserClient userClient, UserCreator userCreator) {
-        this.userClient = userClient;
-        this.userCreator = userCreator;
+    public LandingPageService(UserServiceClient userServiceClient) {
+        this.userServiceClient = userServiceClient;
     }
 
-    public LandingPageResponse buildLandingPage(Jwt jwt){
+    public LandingPageUserMeResponse buildLandingPage(Jwt jwt) {
         String keycloakUUID = jwt.getClaim("sub");
         String username = jwt.getClaim("preferred_username");
         String token = jwt.getTokenValue();
 
-        Optional<LandingPageUserResponse> user = userClient.getUserByUsername(username, token);
+        Optional<LandingPageUserMeResponse> userData = userServiceClient.getUser(token);
 
-        if(user.isEmpty()) {
-            user = Optional.of(userCreator.createUser(username, keycloakUUID, token));
+        if (userData.isPresent()) {
+            return userData.get();
         }
 
-        return new LandingPageResponse(user.get());
+        userServiceClient.createUser(username, keycloakUUID, token);
+
+        return userServiceClient.getUser(token)
+                .orElseThrow(() -> new UserCreationException("Użytkownik nie został utworzony pomyślnie."));
     }
 
 }

@@ -21,13 +21,13 @@ public class User {
     private Long id;
     private String keycloakUUID;
     private String username;
-    private boolean verified;
+    private boolean isProfileCompleted;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserProfile userProfile;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<UserGameProfile> userGameProfile;
+    private Set<UserGameProfile> userGameProfiles;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserSettings userSettings;

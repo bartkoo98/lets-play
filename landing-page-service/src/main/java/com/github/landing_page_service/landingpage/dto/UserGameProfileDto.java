@@ -5,13 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class LandingPageUserResponse {
-    private String username;
-    private String keycloakUUID;
-    private boolean verified;
+public class UserGameProfileDto {
+    private String game;
+    private String elo;
+    private String approach;
+    private String role;
+    private String peak;
+    private String accountLink;
 }

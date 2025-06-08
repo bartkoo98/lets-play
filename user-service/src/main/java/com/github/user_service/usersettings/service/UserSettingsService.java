@@ -36,7 +36,7 @@ public class UserSettingsService {
             throw new AccessDeniedException("You cannot update user settings as: " + tokenUsername + "for the account of: " + username);
         }
 
-        UserSettings settings = userSettingsRepository.findByUser(user).orElseThrow(() -> new ResourceNotFoundException("UserSetting", "user", user.getUsername()));
+        UserSettings settings = userSettingsRepository.findByUserUsername(tokenUsername).orElseThrow(() -> new ResourceNotFoundException("UserSetting", "user", user.getUsername()));
 
         mapToEntityUserSettings(settings, request);
         userSettingsRepository.save(settings);
@@ -53,7 +53,7 @@ public class UserSettingsService {
             throw new AccessDeniedException("You cannot get user settings as: " + tokenUsername + "for the account of: " + username);
         }
 
-        UserSettings settings = userSettingsRepository.findByUser(user).orElseThrow(() -> new ResourceNotFoundException("UserSetting", "user", user.getUsername()));
+        UserSettings settings = userSettingsRepository.findByUserUsername(tokenUsername).orElseThrow(() -> new ResourceNotFoundException("UserSetting", "user", user.getUsername()));
 
         return UserSettingsGetResponse.builder()
                 .theme(settings.getTheme())

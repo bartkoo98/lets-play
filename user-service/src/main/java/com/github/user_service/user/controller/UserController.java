@@ -1,5 +1,6 @@
 package com.github.user_service.user.controller;
 
+import com.github.user_service.user.dto.UserMeResponse;
 import com.github.user_service.user.dto.UserResponse;
 import com.github.user_service.user.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -19,13 +20,19 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable String username, @AuthenticationPrincipal Jwt jwt){
+    public ResponseEntity<UserResponse> getUserByUsername(@PathVariable String username, @AuthenticationPrincipal Jwt jwt){
+        return new ResponseEntity<>(userService.getUserByUsername(username), HttpStatus.OK);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserMeResponse> getUser(@AuthenticationPrincipal Jwt jwt){
         return new ResponseEntity<>(userService.getUserByKeycloakUUID(jwt), HttpStatus.OK);
     }
 
-    @PostMapping("/{username}")
-    public ResponseEntity<UserResponse> createUser(@PathVariable String username, @AuthenticationPrincipal Jwt jwt){
-        return new ResponseEntity<>(userService.createUser(username, jwt), HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<Void> createUser(@AuthenticationPrincipal Jwt jwt){
+        userService.createUser(jwt);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }
